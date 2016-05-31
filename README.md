@@ -6,7 +6,7 @@ simple URL support for D3.js user interfaces
 
 d3.history is a plugin for [D3.js](http://d3js.org/) which adds simple support for deep-linking and URLs based on the user interface state. It automatically updates the URL bar through the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) as you use the [d3.dispatch](https://github.com/d3/d3/wiki/Internals#d3_dispatch) event listening utility.
 
-[live demonstration](https://bl.ocks.org/vijithassar/3518ea727b10e03d02a6c3fdd97d3b69)
+[live demonstration](https://bl.ocks.org/vijithassar/raw/3518ea727b10e03d02a6c3fdd97d3b69/?active=0,10,18,19,20,21,29,39)
 
 # Instructions
 
