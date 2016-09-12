@@ -2,13 +2,17 @@
 
 simple URL support for D3.js user interfaces
 
-# Overview
+## Overview
 
 d3.history is a plugin for [D3.js](http://d3js.org/) which adds simple support for deep-linking and URLs based on the user interface state. It automatically updates the URL bar through the [HTML5 History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) as you use the [d3.dispatch](https://github.com/d3/d3/wiki/Internals#d3_dispatch) event listening utility.
 
 [live demonstration](https://bl.ocks.org/vijithassar/raw/3518ea727b10e03d02a6c3fdd97d3b69/?active=0,10,18,19,20,21,29,39)
 
-# Instructions
+## Installing
+
+If you use NPM, `npm install d3-history`. Otherwise, download the [latest release](https://github.com/vijithassar/d3-history/releases/latest).
+
+## Instructions
 
 D3.js provides [d3.dispatch](https://github.com/d3/d3/wiki/Internals#d3_dispatch), an event listening utility which can be used to cleanly decouple project components from the user interaction events used by the [d3.on](https://github.com/d3/d3/wiki/Selections#on) method. d3.history is largely a drop-in replacement for d3.dispatch, so the API methods intentionally match, with one important exception: with d3.history, the first argument to the event method must always be the new URL fragment you'd like to update the URL bar with.
 
@@ -25,13 +29,13 @@ datum = data[datum];
 // perform the action without giving a URL to the new state
 dispatcher = d3.dispatch('action');
 selection.on('action', function() {
-  dispatcher.action(datum);  
+  dispatcher.call(action, this, datum);
 });
 
 // perform the action and give the new state a URL -- much better!
 history_dispatcher = d3.history('action');
 selection.on('click', function() {
-  history_dispatcher.action('displaying-item-' + index, datum);
+  history_dispatcher.call('action', 'displaying-item-' + index, this, datum);
 });
 ```
 
@@ -44,7 +48,7 @@ dispatcher = d3.history('action');
 // fire action method listener on click
 selection.on('click', function() {
   // pass arguments to the event handler function
-  dispatcher.action(url, datum, additional_information);
+  dispatcher.call(action, url, this, datum, additional_information);
 });
 // arguments are available in the event handler function
 dispatcher.on('action', function(datum, additional_information) {
@@ -58,7 +62,7 @@ In the vast majority of cases, it should be sufficient to track key-value pairs 
 
 ```js
 var dispatcher,
-    state;    
+    state;
 // create a d3.history dispatcher object with an "action" method
 dispatcher = d3.history('action');
 // keep track of project state
@@ -78,7 +82,7 @@ selection.on('click', function() {
   // convert to query parameters and remove trailing ampersand
   url_fragment = '?' + url.slice(0, -1);
   // fire action event handler and update url bar accordingly
-  dispatcher.action(url_fragment);  
+  dispatcher.call(action, url_fragment);
 });
 ```
 
