@@ -1,0 +1,38 @@
+{
+  "name": "d3-history",
+  "version": "2.0.0",
+  "description": "control the HTML5 History API using JavaScript events and d3-dispatch",
+  "keywords": [
+    "d3",
+    "d3-module",
+    "events",
+    "HTML5",
+    "url",
+    "uri",
+    "permalink"
+  ],
+  "license": "BSD-3-Clause",
+  "main": "build/d3-history.js",
+  "jsnext:main": "index",
+  "homepage": "https://github.com/vijithassar/d3-history",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vijithassar/d3-history.git"
+  },
+  "scripts": {
+    "lint": "eslint --config eslintrc.json ./src/*.js && eslint --config eslintrc.json ./test/*.js",
+    "pretest": "rm -rf build && mkdir build && rollup -g d3-dispatch:d3,d3-history:d3 -f umd -n d3 -o build/d3-history.js -- index.js && npm run lint",
+    "test": "tape 'test/**/*-test.js'",
+    "prepublish": "npm run test && uglifyjs build/d3-history.js -c -m -o build/d3-history.min.js",
+    "postpublish": "zip -j build/d3-history.zip -- LICENSE README.md build/d3-history.js build/d3-history.min.js"
+  },
+  "devDependencies": {
+    "eslint": "^3.3.1",
+    "rollup": "0.27",
+    "tape": "4",
+    "uglify-js": "2"
+  },
+  "dependencies": {
+    "d3-dispatch": "^1.0.1"
+  }
+}
