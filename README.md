@@ -14,7 +14,7 @@ If you use NPM, `npm install d3-history`. Otherwise, download the [latest releas
 
 ## Instructions
 
-D3.js provides [d3.dispatch](https://github.com/d3/d3/wiki/Internals#d3_dispatch), an event listening utility which can be used to cleanly decouple project components from the user interaction events used by the [d3.on](https://github.com/d3/d3/wiki/Selections#on) method. d3.history is largely a drop-in replacement for d3.dispatch, so the API methods intentionally match, with one important exception: with d3.history, the first argument to the event method must always be the new URL fragment you'd like to update the URL bar with.
+D3.js provides [d3.dispatch](https://github.com/d3/d3/wiki/Internals#d3_dispatch), an event listening utility which can be used to cleanly decouple project components from the user interaction events used by the [d3.on](https://github.com/d3/d3/wiki/Selections#on) method. d3.history is largely a drop-in replacement for d3.dispatch, so the API methods intentionally match, with one important exception: with d3.history, the call() method requires a third argument containing the new URL string, in addition to the event name and the context object as required by the native d3.dispatch.
 
 ```js
 var dispatcher,
@@ -35,7 +35,7 @@ selection.on('action', function() {
 // perform the action and give the new state a URL -- much better!
 history_dispatcher = d3.history('action');
 selection.on('click', function() {
-  history_dispatcher.call('action', 'displaying-item-' + index, this, datum);
+  history_dispatcher.call('action', this, 'displaying-item-' + index, datum);
 });
 ```
 
@@ -48,7 +48,7 @@ dispatcher = d3.history('action');
 // fire action method listener on click
 selection.on('click', function() {
   // pass arguments to the event handler function
-  dispatcher.call(action, url, this, datum, additional_information);
+  dispatcher.call(action, this, url, datum, additional_information);
 });
 // arguments are available in the event handler function
 dispatcher.on('action', function(datum, additional_information) {
@@ -82,7 +82,7 @@ selection.on('click', function() {
   // convert to query parameters and remove trailing ampersand
   url_fragment = '?' + url.slice(0, -1);
   // fire action event handler and update url bar accordingly
-  dispatcher.call(action, url_fragment);
+  dispatcher.call(action, this, url_fragment);
 });
 ```
 
