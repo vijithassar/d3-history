@@ -80,7 +80,7 @@ selection.on('click', function() {
     url_fragment += key + '=' + value + '&';
   });
   // convert to query parameters and remove trailing ampersand
-  url_fragment = '?' + url.slice(0, -1);
+  url_fragment = '?' + url_fragment.slice(0, -1);
   // fire action event handler and update url bar accordingly
   dispatcher.call(action, this, url_fragment);
 });
