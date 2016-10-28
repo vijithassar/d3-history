@@ -1,6 +1,7 @@
 {
   "name": "d3-history",
   "version": "2.0.0",
+  "author": "Vijith Assar",
   "description": "control the HTML5 History API using JavaScript events and d3-dispatch",
   "keywords": [
     "d3",
