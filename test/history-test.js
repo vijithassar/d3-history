@@ -1,8 +1,8 @@
 var tape = require('tape'),
-    jsdom = require('jsdom').jsdom,
+    JSDOM = require('jsdom').JSDOM,
     d3 = require('../');
 
-global.document = jsdom('<html><body></body></html>');
+global.document = new JSDOM('<html><body></body></html>');
 global.window = document.parentWindow;
 
 tape('d3.history() method exists', function(test) {

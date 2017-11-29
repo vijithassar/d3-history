@@ -1,6 +1,6 @@
 {
   "name": "d3-history",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Vijith Assar",
   "description": "control the HTML5 History API using JavaScript events and d3-dispatch",
   "keywords": [
@@ -29,9 +29,10 @@
   },
   "devDependencies": {
     "eslint": "^3.3.1",
+    "jsdom": "^11.5.1",
     "rollup": "0.27",
     "tape": "4",
-    "uglify-js": "2"
+    "uglify-js": "2.6"
   },
   "dependencies": {
     "d3-dispatch": "^1.0.1"
